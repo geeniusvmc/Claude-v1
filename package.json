@@ -1,0 +1,16 @@
+{
+  "name": "claude-v1",
+  "version": "1.0.0",
+  "description": "Geenius Studio mobile-first marketing site.",
+  "private": true,
+  "main": "script.js",
+  "scripts": {
+    "start": "npx serve ."
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "framer-motion": "^12.40.0"
+  }
+}
