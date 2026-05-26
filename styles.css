@@ -703,21 +703,52 @@ button {
   .site-header .nav-bar .mobile-nav { flex: 1; display: flex; justify-content: flex-end; align-items: center; }
 }
 
-/* Scroll reveal */
-.service-card,
-.work-card,
-.bullets li,
-.section h2 {
-  opacity: 0;
-  transform: translateY(16px);
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+/* ================================================================
+   Scroll progress bar (framer-motion driven)
+   ================================================================ */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  z-index: 60;
+  pointer-events: none;
 }
-.service-card.in-view,
-.work-card.in-view,
-.bullets li.in-view,
-.section h2.in-view {
-  opacity: 1;
-  transform: none;
+
+/* ================================================================
+   Motion: initial hidden states (only when JS animations are active)
+   ------------------------------------------------------------------
+   `.motion-ready` is added synchronously in <head>, and removed if the
+   animation module never initializes (CDN failure / unsupported browser)
+   or when the user prefers reduced motion — so content is never trapped
+   hidden. framer-motion animates these elements to their visible state.
+   ================================================================ */
+.motion-ready .hero .eyebrow,
+.motion-ready .hero h1,
+.motion-ready .hero .lead,
+.motion-ready .hero .hero-actions,
+.motion-ready .hero .hero-stats,
+.motion-ready .section h2,
+.motion-ready .section .eyebrow,
+.motion-ready .section-lead,
+.motion-ready .service-card,
+.motion-ready .work-card,
+.motion-ready .bullets li,
+.motion-ready .contact-list li {
+  opacity: 0;
+}
+
+.motion-ready .service-card,
+.motion-ready .work-card,
+.motion-ready .bullets li,
+.motion-ready .contact-list li,
+.motion-ready .section h2,
+.motion-ready .section-lead {
+  transform: translateY(16px);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -727,8 +758,5 @@ button {
     transition-duration: 0.001ms !important;
     scroll-behavior: auto !important;
   }
-  .service-card, .work-card, .bullets li, .section h2 {
-    opacity: 1;
-    transform: none;
-  }
+  .scroll-progress { display: none; }
 }

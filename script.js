@@ -49,20 +49,4 @@
 
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
-
-  const io = 'IntersectionObserver' in window
-    ? new IntersectionObserver((entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            io.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.12 })
-    : null;
-
-  if (io) {
-    document.querySelectorAll('.service-card, .work-card, .bullets li, .section h2')
-      .forEach((el) => io.observe(el));
-  }
 })();
